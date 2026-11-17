@@ -37,7 +37,7 @@ inline PathResult dijkstra(const Graph& g, int s, int t, Weight w) {
     QE cur;
     while (pq.pop(cur)) {
         int u = cur.v;
-        if (done[u]) continue;            // stale heap entry (lazy deletion)
+        if (done[u]) continue;            
         done[u] = 1;
         res.steps.push_back({"visit", u, -1, (int)cur.d});
         if (t >= 0 && u == t) break;
