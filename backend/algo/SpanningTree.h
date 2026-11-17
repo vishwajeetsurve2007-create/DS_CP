@@ -12,11 +12,11 @@
 
 struct MstResult {
     std::vector<UEdge> edges;
-    long long cost = 0;          // cost of the recovery backbone
-    long long fullCost = 0;      // cost of all usable links between surviving machines
-    int components = 0;          // >1 means the survivors cannot be fully reconnected
-    long long heapOps = 0;       // pushes + pops
-    long long dsuOps = 0;        // union / find calls (Kruskal only)
+    long long cost = 0;          
+    long long fullCost = 0;      
+    int components = 0;          
+    long long heapOps = 0;       
+    long long dsuOps = 0;        
 };
 
 inline int aliveCount(const Graph& g) {
@@ -51,7 +51,7 @@ inline MstResult prim(const Graph& g) {
     int comps = 0;
     for (int s = 0; s < g.size(); ++s) {
         if (in[s] || !g.active(s)) continue;
-        ++comps;                                   // new tree in the forest
+        ++comps;                                   
         Heap<Cand, Before> pq;
         auto grow = [&](int v) {
             in[v] = 1;
@@ -62,7 +62,7 @@ inline MstResult prim(const Graph& g) {
         Cand c;
         while (pq.pop(c)) {
             ++r.heapOps;
-            if (in[c.to]) continue;                // stale candidate (lazy deletion)
+            if (in[c.to]) continue;                
             r.edges.push_back({c.from < c.to ? c.from : c.to, c.from < c.to ? c.to : c.from, c.cost, c.risk, c.imp, false});
             r.cost += c.cost;
             grow(c.to);
