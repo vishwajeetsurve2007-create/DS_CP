@@ -86,6 +86,6 @@ int main(int argc, char** argv) {
     });
 
     std::cout << "Network Resilience Simulator running at http://localhost:" << port << "\n";
-    if (!svr.listen("127.0.0.1", port)) { std::cerr << "Could not bind port " << port << "\n"; return 1; }
+    if (!svr.listen("0.0.0.0", port)) { std::cerr << "Could not bind port " << port << "\n"; return 1; }
     return 0;
 }
